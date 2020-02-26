@@ -4,7 +4,7 @@ namespace PoP\UserRolesAccessControl\TypeResolverDecorators;
 use PoP\UserRolesAccessControl\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
+use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\UserRoles\Conditional\UserState\DirectiveResolvers\ValidateDoesLoggedInUserHaveCapabilityDirectiveResolver;
 use PoP\UserStateAccessControl\TypeResolverDecorators\ValidateConditionForFieldsPublicSchemaTypeResolverDecoratorTrait;
 
