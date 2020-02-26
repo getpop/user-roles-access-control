@@ -5,7 +5,7 @@ use PoP\UserRolesAccessControl\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
-use PoP\UserRoles\Conditional\UserState\DirectiveResolvers\ValidateDoesLoggedInUserHaveRoleDirectiveResolver;
+use PoP\UserRoles\Conditional\UserState\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
 use PoP\UserStateAccessControl\TypeResolverDecorators\ValidateConditionForDirectivesPublicSchemaTypeResolverDecoratorTrait;
 
 class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
@@ -28,7 +28,7 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecor
         $mandatoryDirectivesForDirectives = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $configuredEntryList = ComponentConfiguration::getRestrictedDirectivesByUserRole();
-        $directiveName = ValidateDoesLoggedInUserHaveRoleDirectiveResolver::getDirectiveName();
+        $directiveName = ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::getDirectiveName();
         $directiveResolverClassRoles = [];
         foreach ($configuredEntryList as $entry) {
             $directiveResolverClass = $entry[0];
@@ -36,14 +36,14 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecor
             $directiveResolverClassRoles[$directiveResolverClass][] = $role;
         }
         foreach ($directiveResolverClassRoles as $directiveResolverClass => $roles) {
-            $validateDoesLoggedInUserHaveRoleDirective = $fieldQueryInterpreter->getDirective(
+            $validateDoesLoggedInUserHaveAnyRoleDirective = $fieldQueryInterpreter->getDirective(
                 $directiveName,
                 [
                     'roles' => $roles,
                 ]
             );
             $mandatoryDirectivesForDirectives[$directiveResolverClass::getDirectiveName()] = [
-                $validateDoesLoggedInUserHaveRoleDirective,
+                $validateDoesLoggedInUserHaveAnyRoleDirective,
             ];
         }
         return $mandatoryDirectivesForDirectives;

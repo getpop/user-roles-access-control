@@ -5,7 +5,7 @@ use PoP\UserRolesAccessControl\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
-use PoP\UserRoles\Conditional\UserState\DirectiveResolvers\ValidateDoesLoggedInUserHaveCapabilityDirectiveResolver;
+use PoP\UserRoles\Conditional\UserState\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
 use PoP\UserStateAccessControl\TypeResolverDecorators\ValidateConditionForFieldsPublicSchemaTypeResolverDecoratorTrait;
 
 class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
@@ -28,7 +28,7 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDec
         $mandatoryDirectivesForFields = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $configuredEntryList = ComponentConfiguration::getRestrictedFieldsByUserCapability();
-        $directiveName = ValidateDoesLoggedInUserHaveCapabilityDirectiveResolver::getDirectiveName();
+        $directiveName = ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::getDirectiveName();
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
             if ($matchingEntries = $this->getMatchingEntriesFromConfiguration(
@@ -42,14 +42,14 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDec
                     },
                     $matchingEntries
                 )))) {
-                    $validateDoesLoggedInUserHaveRoleDirective = $fieldQueryInterpreter->getDirective(
+                    $validateDoesLoggedInUserHaveAnyRoleDirective = $fieldQueryInterpreter->getDirective(
                         $directiveName,
                         [
                             'capabilities' => $capabilities,
                         ]
                     );
                     $mandatoryDirectivesForFields[$fieldName] = [
-                        $validateDoesLoggedInUserHaveRoleDirective,
+                        $validateDoesLoggedInUserHaveAnyRoleDirective,
                     ];
                 }
             }

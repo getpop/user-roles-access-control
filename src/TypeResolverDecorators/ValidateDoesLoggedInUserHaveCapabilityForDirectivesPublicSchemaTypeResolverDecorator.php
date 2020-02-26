@@ -5,7 +5,7 @@ use PoP\UserRolesAccessControl\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
-use PoP\UserRoles\Conditional\UserState\DirectiveResolvers\ValidateDoesLoggedInUserHaveCapabilityDirectiveResolver;
+use PoP\UserRoles\Conditional\UserState\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
 use PoP\UserStateAccessControl\TypeResolverDecorators\ValidateConditionForDirectivesPublicSchemaTypeResolverDecoratorTrait;
 
 class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
@@ -28,7 +28,7 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaTypeResolve
         $mandatoryDirectivesForDirectives = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $configuredEntryList = ComponentConfiguration::getRestrictedDirectivesByUserCapability();
-        $directiveName = ValidateDoesLoggedInUserHaveCapabilityDirectiveResolver::getDirectiveName();
+        $directiveName = ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::getDirectiveName();
         $directiveResolverClassCapabilities = [];
         foreach ($configuredEntryList as $entry) {
             $directiveResolverClass = $entry[0];
@@ -36,14 +36,14 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaTypeResolve
             $directiveResolverClassCapabilities[$directiveResolverClass][] = $capability;
         }
         foreach ($directiveResolverClassCapabilities as $directiveResolverClass => $capabilities) {
-            $validateDoesLoggedInUserHaveCapabilityDirective = $fieldQueryInterpreter->getDirective(
+            $validateDoesLoggedInUserHaveAnyCapabilityDirective = $fieldQueryInterpreter->getDirective(
                 $directiveName,
                 [
                     'capabilities' => $capabilities,
                 ]
             );
             $mandatoryDirectivesForDirectives[$directiveResolverClass::getDirectiveName()] = [
-                $validateDoesLoggedInUserHaveCapabilityDirective,
+                $validateDoesLoggedInUserHaveAnyCapabilityDirective,
             ];
         }
         return $mandatoryDirectivesForDirectives;
