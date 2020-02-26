@@ -11,3 +11,7 @@ services:
     PoP\UserRolesAccessControl\Hooks\:
         resource: '../src/Hooks/*'
         public: true
+
+    PoP\UserRolesAccessControl\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
+        public: true
