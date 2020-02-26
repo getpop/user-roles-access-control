@@ -19,8 +19,8 @@
     "prefer-stable": true,
     "require": {
         "php" : "~7.1",
-        "getpop/user-state": "dev-master",
-        "getpop/user-roles": "dev-master"
+        "getpop/user-roles": "dev-master",
+        "getpop/access-control": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit" : ">=7.0",
