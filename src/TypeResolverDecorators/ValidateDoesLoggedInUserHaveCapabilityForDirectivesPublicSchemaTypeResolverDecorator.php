@@ -27,7 +27,8 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaTypeResolve
     {
         $mandatoryDirectivesForDirectives = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $configuredEntryList = ComponentConfiguration::getRestrictedDirectivesByUserCapability();
+        $calledClass = get_called_class();
+        $configuredEntryList = $calledClass::getConfiguredEntryList();
         $directiveName = ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::getDirectiveName();
         $directiveResolverClassCapabilities = [];
         foreach ($configuredEntryList as $entry) {
