@@ -12,7 +12,7 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecor
 {
     use ValidateConditionForDirectivesPublicSchemaTypeResolverDecoratorTrait;
 
-    protected static function getConfiguredEntryList(): array
+    protected function getConfiguredEntryList(): array
     {
         return ComponentConfiguration::getRestrictedDirectivesByUserRole();
     }
