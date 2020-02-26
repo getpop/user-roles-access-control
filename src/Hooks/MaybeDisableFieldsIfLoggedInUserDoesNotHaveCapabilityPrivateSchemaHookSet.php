@@ -2,7 +2,7 @@
 namespace PoP\UserRolesAccessControl\Hooks;
 
 use PoP\UserRolesAccessControl\ComponentConfiguration;
-use PoP\UserRoles\Helpers\UserRoleHelper;
+use PoP\UserRolesAccessControl\Helpers\UserRoleHelper;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\UserState\Hooks\AbstractMaybeDisableFieldsIfUserNotLoggedInPrivateSchemaHookSet;

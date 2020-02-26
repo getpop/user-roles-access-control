@@ -1,7 +1,7 @@
 <?php
 namespace PoP\UserRolesAccessControl\Hooks;
 
-use PoP\UserRoles\Helpers\UserRoleHelper;
+use PoP\UserRolesAccessControl\Helpers\UserRoleHelper;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\UserState\Hooks\AbstractMaybeDisableDirectivesIfUserNotLoggedInPrivateSchemaHookSet;
