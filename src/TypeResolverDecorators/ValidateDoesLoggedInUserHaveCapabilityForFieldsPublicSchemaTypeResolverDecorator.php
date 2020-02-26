@@ -42,14 +42,14 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDec
                     },
                     $matchingEntries
                 )))) {
-                    $validateDoesLoggedInUserHaveAnyRoleDirective = $fieldQueryInterpreter->getDirective(
+                    $validateDoesLoggedInUserHaveAnyCapabilityDirective = $fieldQueryInterpreter->getDirective(
                         $directiveName,
                         [
                             'capabilities' => $capabilities,
                         ]
                     );
                     $mandatoryDirectivesForFields[$fieldName] = [
-                        $validateDoesLoggedInUserHaveAnyRoleDirective,
+                        $validateDoesLoggedInUserHaveAnyCapabilityDirective,
                     ];
                 }
             }
