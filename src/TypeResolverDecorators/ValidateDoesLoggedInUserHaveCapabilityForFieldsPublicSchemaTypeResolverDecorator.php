@@ -18,7 +18,6 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDec
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForFields(AccessControlGroups::CAPABILITIES);
-        // return ComponentConfiguration::getRestrictedFieldsByUserCapability();
     }
 
     /**

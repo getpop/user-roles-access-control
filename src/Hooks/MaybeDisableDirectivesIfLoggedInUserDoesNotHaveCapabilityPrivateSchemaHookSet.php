@@ -18,7 +18,6 @@ class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHook
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForDirectives(AccessControlGroups::CAPABILITIES);
-        // return ComponentConfiguration::getRestrictedDirectivesByUserCapability();
     }
 
     /**

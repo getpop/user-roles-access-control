@@ -18,7 +18,6 @@ class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet ex
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForDirectives(AccessControlGroups::ROLES);
-        // return ComponentConfiguration::getRestrictedDirectivesByUserRole();
     }
 
     /**

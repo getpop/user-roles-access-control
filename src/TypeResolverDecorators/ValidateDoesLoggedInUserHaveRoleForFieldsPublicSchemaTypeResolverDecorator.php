@@ -18,7 +18,6 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaTypeResolverDecorator
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForFields(AccessControlGroups::ROLES);
-        // return ComponentConfiguration::getRestrictedFieldsByUserRole();
     }
 
     /**
