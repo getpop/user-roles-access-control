@@ -12,6 +12,7 @@ use PoP\ComponentModel\Container\ContainerBuilderUtils;
  */
 class Component extends AbstractComponent
 {
+    public static $COMPONENT_DIR;
     use YAMLServicesTrait, CanDisableComponentTrait;
     // const VERSION = '0.1.0';
 
@@ -22,7 +23,12 @@ class Component extends AbstractComponent
     {
         if (self::isEnabled()) {
             parent::init();
-            self::initYAMLServices(dirname(__DIR__));
+            self::$COMPONENT_DIR = dirname(__DIR__);
+            self::initYAMLServices(self::$COMPONENT_DIR);
+
+            if (class_exists('\PoP\CacheControl\Component')) {
+                \PoP\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::init();
+            }
         }
     }
 
@@ -43,6 +49,10 @@ class Component extends AbstractComponent
         // Initialize classes
         ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__.'\\Hooks');
         ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__.'\\TypeResolverDecorators');
-        ContainerBuilderUtils::attachDirectiveResolversFromNamespace(__NAMESPACE__.'\\DirectiveResolvers');
+        ContainerBuilderUtils::attachDirectiveResolversFromNamespace(__NAMESPACE__.'\\DirectiveResolvers');// Boot conditional on API package being installed
+
+        if (class_exists('\PoP\CacheControl\Component')) {
+            \PoP\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::boot();
+        }
     }
 }
