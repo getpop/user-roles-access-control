@@ -1,7 +1,7 @@
 <?php
 namespace PoP\UserRolesAccessControl;
 
-use PoP\AccessControl\Environment;
+use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
@@ -28,7 +28,7 @@ class Component extends AbstractComponent
 
     protected static function resolveEnabled()
     {
-        return !Environment::disableAccessControl();
+        return AccessControlComponent::isEnabled();
     }
 
     /**
