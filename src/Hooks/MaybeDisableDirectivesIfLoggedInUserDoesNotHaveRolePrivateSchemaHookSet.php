@@ -26,8 +26,8 @@ class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet ex
      * @param string $item
      * @return boolean
      */
-    protected function doesCurrentUserHaveItem(string $role): bool
+    protected function doesCurrentUserHaveAnyItem(array $roles): bool
     {
-        return UserRoleHelper::doesCurrentUserHaveRole($role);
+        return UserRoleHelper::doesCurrentUserHaveAnyRole($roles);
     }
 }

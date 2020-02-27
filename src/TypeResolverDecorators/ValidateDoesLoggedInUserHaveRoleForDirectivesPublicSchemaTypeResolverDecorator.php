@@ -32,13 +32,9 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecor
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $entryList = static::getEntryList();
         $directiveName = ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::getDirectiveName();
-        $directiveResolverClassRoles = [];
         foreach ($entryList as $entry) {
             $directiveResolverClass = $entry[0];
-            $role = $entry[1];
-            $directiveResolverClassRoles[$directiveResolverClass][] = $role;
-        }
-        foreach ($directiveResolverClassRoles as $directiveResolverClass => $roles) {
+            $roles = $entry[1];
             $validateDoesLoggedInUserHaveAnyRoleDirective = $fieldQueryInterpreter->getDirective(
                 $directiveName,
                 [

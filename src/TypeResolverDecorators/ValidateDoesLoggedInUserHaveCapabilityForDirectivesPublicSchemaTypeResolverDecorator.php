@@ -32,13 +32,9 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaTypeResolve
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $entryList = $this->getEntryList();
         $directiveName = ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::getDirectiveName();
-        $directiveResolverClassCapabilities = [];
         foreach ($entryList as $entry) {
             $directiveResolverClass = $entry[0];
-            $capability = $entry[1];
-            $directiveResolverClassCapabilities[$directiveResolverClass][] = $capability;
-        }
-        foreach ($directiveResolverClassCapabilities as $directiveResolverClass => $capabilities) {
+            $capabilities = $entry[1];
             $validateDoesLoggedInUserHaveAnyCapabilityDirective = $fieldQueryInterpreter->getDirective(
                 $directiveName,
                 [

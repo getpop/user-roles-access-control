@@ -39,21 +39,15 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDec
                 $typeResolver,
                 $fieldName
             )) {
-                if ($capabilities = array_values(array_unique(array_map(
-                    function($entry) {
-                        return $entry[2];
-                    },
-                    $matchingEntries
-                )))) {
-                    $validateDoesLoggedInUserHaveAnyCapabilityDirective = $fieldQueryInterpreter->getDirective(
-                        $directiveName,
-                        [
-                            'capabilities' => $capabilities,
-                        ]
-                    );
-                    $mandatoryDirectivesForFields[$fieldName] = [
-                        $validateDoesLoggedInUserHaveAnyCapabilityDirective,
-                    ];
+                foreach ($matchingEntries as $entry) {
+                    if ($capabilities = $entry[2]) {
+                        $mandatoryDirectivesForFields[$fieldName][] = $fieldQueryInterpreter->getDirective(
+                            $directiveName,
+                            [
+                                'capabilities' => $capabilities,
+                            ]
+                        );
+                    }
                 }
             }
         }

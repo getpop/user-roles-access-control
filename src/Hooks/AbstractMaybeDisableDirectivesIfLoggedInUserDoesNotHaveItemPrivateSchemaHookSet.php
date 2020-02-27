@@ -26,7 +26,7 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
      * @param string $item
      * @return boolean
      */
-    abstract protected function doesCurrentUserHaveItem(string $item): bool;
+    abstract protected function doesCurrentUserHaveAnyItem(array $items): bool;
 
     /**
      * Remove directiveName "translate" if the user is not logged in
@@ -50,20 +50,13 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
                     $entryList
                 )));
             } else {
-                // For each entry, validate if the current user has that item (role/capability). If not, the directive must be removed
+                // For each entry, validate if the current user has any of those items (roles/capabilities). If not, the directive must be removed
                 $this->directiveResolverClasses = [];
-                $itemDirectiveResolverClasses = [];
                 foreach ($entryList as $entry) {
                     $directiveResolverClass = $entry[0];
-                    $item = $entry[1];
-                    $itemDirectiveResolverClasses[$item][] = $directiveResolverClass;
-                }
-                foreach ($itemDirectiveResolverClasses as $item => $directiveResolverClasses) {
-                    if (!$this->doesCurrentUserHaveItem($item)) {
-                        $this->directiveResolverClasses = array_merge(
-                            $this->directiveResolverClasses,
-                            $directiveResolverClasses
-                        );
+                    $items = $entry[1];
+                    if (!$this->doesCurrentUserHaveAnyItem($items)) {
+                        $this->directiveResolverClasses[] = $directiveResolverClass;
                     }
                 }
             }

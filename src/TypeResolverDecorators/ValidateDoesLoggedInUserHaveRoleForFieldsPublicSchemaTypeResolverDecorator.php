@@ -39,21 +39,15 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaTypeResolverDecorator
                 $typeResolver,
                 $fieldName
             )) {
-                if ($roles = array_values(array_unique(array_map(
-                    function($entry) {
-                        return $entry[2];
-                    },
-                    $matchingEntries
-                )))) {
-                    $validateDoesLoggedInUserHaveAnyRoleDirective = $fieldQueryInterpreter->getDirective(
-                        $directiveName,
-                        [
-                            'roles' => $roles,
-                        ]
-                    );
-                    $mandatoryDirectivesForFields[$fieldName] = [
-                        $validateDoesLoggedInUserHaveAnyRoleDirective,
-                    ];
+                foreach ($matchingEntries as $entry) {
+                    if ($roles = $entry[2]) {
+                        $mandatoryDirectivesForFields[$fieldName][] = $fieldQueryInterpreter->getDirective(
+                            $directiveName,
+                            [
+                                'roles' => $roles,
+                            ]
+                        );
+                    }
                 }
             }
         }

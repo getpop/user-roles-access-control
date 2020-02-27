@@ -1,7 +1,6 @@
 <?php
 namespace PoP\UserRolesAccessControl\Hooks;
 
-use PoP\UserRolesAccessControl\ComponentConfiguration;
 use PoP\UserRolesAccessControl\Helpers\UserRoleHelper;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -47,14 +46,13 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extend
             $typeResolver,
             $fieldName
         )) {
-            $roles = array_values(array_unique(array_map(
-                function($entry) {
-                    return $entry[2];
-                },
-                $matchingEntries
-            )));
-            // Check if the current user has any of the required roles, then access is granted, otherwise reject it
-            return !UserRoleHelper::doesCurrentUserHaveAnyRole($roles);
+            foreach ($matchingEntries as $entry) {
+                // Check if the current user has any of the required roles, then access is granted, otherwise reject it
+                $roles = $entry[2];
+                if (!UserRoleHelper::doesCurrentUserHaveAnyRole($roles)) {
+                    return true;
+                }
+            }
         }
         return false;
     }
