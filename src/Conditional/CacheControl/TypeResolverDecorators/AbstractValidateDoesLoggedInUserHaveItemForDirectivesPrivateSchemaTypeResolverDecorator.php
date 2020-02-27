@@ -2,9 +2,8 @@
 namespace PoP\UserRolesAccessControl\Conditional\CacheControl\TypeResolverDecorators;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPrivateSchemaTypeResolverDecorator;
+use PoP\CacheControl\Helpers\CacheControlHelper;
 use PoP\UserStateAccessControl\TypeResolverDecorators\ValidateConditionForDirectivesTypeResolverDecoratorTrait;
 
 abstract class AbstractValidateDoesLoggedInUserHaveItemForDirectivesPrivateSchemaTypeResolverDecorator extends AbstractPrivateSchemaTypeResolverDecorator
@@ -22,18 +21,12 @@ abstract class AbstractValidateDoesLoggedInUserHaveItemForDirectivesPrivateSchem
     public function getMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {
         $mandatoryDirectivesForDirectives = [];
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $entryList = $this->getEntryList();
-        $noCacheControlDirectiveResolver = $fieldQueryInterpreter->getDirective(
-            AbstractCacheControlDirectiveResolver::getDirectiveName(),
-            [
-                'maxAge' => 0,
-            ]
-        );
+        $noCacheControlDirective = CacheControlHelper::getNoCacheDirective();
         foreach ($entryList as $entry) {
             $directiveResolverClass = $entry[0];
             $mandatoryDirectivesForDirectives[$directiveResolverClass::getDirectiveName()] = [
-                $noCacheControlDirectiveResolver,
+                $noCacheControlDirective,
             ];
         }
         return $mandatoryDirectivesForDirectives;
