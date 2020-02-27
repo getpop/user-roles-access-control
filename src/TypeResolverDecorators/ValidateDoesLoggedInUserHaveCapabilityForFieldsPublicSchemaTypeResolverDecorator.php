@@ -7,11 +7,11 @@ use PoP\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
-use PoP\UserStateAccessControl\TypeResolverDecorators\ValidateConditionForFieldsPublicSchemaTypeResolverDecoratorTrait;
+use PoP\UserStateAccessControl\TypeResolverDecorators\ValidateConditionForFieldsTypeResolverDecoratorTrait;
 
 class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
 {
-    use ValidateConditionForFieldsPublicSchemaTypeResolverDecoratorTrait;
+    use ValidateConditionForFieldsTypeResolverDecoratorTrait;
 
     protected static function getEntryList(): array
     {

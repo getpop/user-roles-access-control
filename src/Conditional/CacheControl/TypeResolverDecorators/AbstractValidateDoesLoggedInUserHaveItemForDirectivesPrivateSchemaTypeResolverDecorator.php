@@ -5,11 +5,11 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPrivateSchemaTypeResolverDecorator;
-use PoP\UserStateAccessControl\TypeResolverDecorators\ValidateConditionForDirectivesPublicSchemaTypeResolverDecoratorTrait;
+use PoP\UserStateAccessControl\TypeResolverDecorators\ValidateConditionForDirectivesTypeResolverDecoratorTrait;
 
 abstract class AbstractValidateDoesLoggedInUserHaveItemForDirectivesPrivateSchemaTypeResolverDecorator extends AbstractPrivateSchemaTypeResolverDecorator
 {
-    use ValidateConditionForDirectivesPublicSchemaTypeResolverDecoratorTrait;
+    use ValidateConditionForDirectivesTypeResolverDecoratorTrait;
 
     abstract protected function getEntryList(): array;
 
