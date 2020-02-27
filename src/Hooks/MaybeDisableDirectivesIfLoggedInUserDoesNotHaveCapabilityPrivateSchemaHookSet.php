@@ -1,7 +1,6 @@
 <?php
 namespace PoP\UserRolesAccessControl\Hooks;
 
-use PoP\UserRolesAccessControl\ComponentConfiguration;
 use PoP\UserRolesAccessControl\Helpers\UserRoleHelper;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\UserRolesAccessControl\Services\AccessControlGroups;
