@@ -2,9 +2,9 @@
 namespace PoP\UserRolesAccessControl\Hooks;
 
 use PoP\UserState\Facades\UserStateTypeDataResolverFacade;
-use PoP\AccessControl\Hooks\AbstractMaybeDisableDirectivesInPrivateSchemaHookSet;
+use PoP\UserStateAccessControl\Hooks\AbstractMaybeDisableUserStateDirectivesInPrivateSchemaHookSet;
 
-abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivateSchemaHookSet extends AbstractMaybeDisableDirectivesInPrivateSchemaHookSet
+abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivateSchemaHookSet extends AbstractMaybeDisableUserStateDirectivesInPrivateSchemaHookSet
 {
     protected $directiveResolverClasses;
 
