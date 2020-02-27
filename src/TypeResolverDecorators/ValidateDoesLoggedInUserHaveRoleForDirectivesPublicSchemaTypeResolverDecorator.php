@@ -12,7 +12,7 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecor
 {
     use ValidateConditionForDirectivesPublicSchemaTypeResolverDecoratorTrait;
 
-    protected function getConfiguredEntryList(): array
+    protected function getEntryList(): array
     {
         return ComponentConfiguration::getRestrictedDirectivesByUserRole();
     }
@@ -27,10 +27,10 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecor
     {
         $mandatoryDirectivesForDirectives = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $configuredEntryList = ComponentConfiguration::getRestrictedDirectivesByUserRole();
+        $entryList = ComponentConfiguration::getRestrictedDirectivesByUserRole();
         $directiveName = ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::getDirectiveName();
         $directiveResolverClassRoles = [];
-        foreach ($configuredEntryList as $entry) {
+        foreach ($entryList as $entry) {
             $directiveResolverClass = $entry[0];
             $role = $entry[1];
             $directiveResolverClassRoles[$directiveResolverClass][] = $role;

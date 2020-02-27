@@ -18,7 +18,7 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
      *
      * @return array
      */
-    abstract protected function getConfiguredEntryList(): array;
+    abstract protected function getEntryList(): array;
 
     /**
      * Indicate if the user has the item, to be implemented
@@ -39,21 +39,21 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
     protected function getDirectiveResolverClasses(): array
     {
         if (is_null($this->directiveResolverClasses)) {
-            $configuredEntryList = $this->getConfiguredEntryList();
+            $entryList = $this->getEntryList();
             // If the user is not logged in, then it's all directives
             $userStateTypeDataResolver = UserStateTypeDataResolverFacade::getInstance();
             if (!$userStateTypeDataResolver->isUserLoggedIn()) {
                 $this->directiveResolverClasses = array_values(array_unique(array_map(
-                    function($configuredEntry) {
-                        return $configuredEntry[0];
+                    function($entry) {
+                        return $entry[0];
                     },
-                    $configuredEntryList
+                    $entryList
                 )));
             } else {
                 // For each entry, validate if the current user has that item (role/capability). If not, the directive must be removed
                 $this->directiveResolverClasses = [];
                 $itemDirectiveResolverClasses = [];
-                foreach ($configuredEntryList as $entry) {
+                foreach ($entryList as $entry) {
                     $directiveResolverClass = $entry[0];
                     $item = $entry[1];
                     $itemDirectiveResolverClasses[$item][] = $directiveResolverClass;

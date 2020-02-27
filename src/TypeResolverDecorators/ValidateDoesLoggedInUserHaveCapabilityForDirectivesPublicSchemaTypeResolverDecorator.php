@@ -12,7 +12,7 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaTypeResolve
 {
     use ValidateConditionForDirectivesPublicSchemaTypeResolverDecoratorTrait;
 
-    protected function getConfiguredEntryList(): array
+    protected function getEntryList(): array
     {
         return ComponentConfiguration::getRestrictedDirectivesByUserCapability();
     }
@@ -27,10 +27,10 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaTypeResolve
     {
         $mandatoryDirectivesForDirectives = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $configuredEntryList = $this->getConfiguredEntryList();
+        $entryList = $this->getEntryList();
         $directiveName = ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::getDirectiveName();
         $directiveResolverClassCapabilities = [];
-        foreach ($configuredEntryList as $entry) {
+        foreach ($entryList as $entry) {
             $directiveResolverClass = $entry[0];
             $capability = $entry[1];
             $directiveResolverClassCapabilities[$directiveResolverClass][] = $capability;

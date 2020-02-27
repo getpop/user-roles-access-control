@@ -17,7 +17,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet 
      *
      * @return array
      */
-    protected static function getConfiguredEntryList(): array
+    protected static function getEntryList(): array
     {
         return ComponentConfiguration::getRestrictedFieldsByUserCapability();
     }

@@ -12,7 +12,7 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaTypeResolverDecorator
 {
     use ValidateConditionForFieldsPublicSchemaTypeResolverDecoratorTrait;
 
-    protected static function getConfiguredEntryList(): array
+    protected static function getEntryList(): array
     {
         return ComponentConfiguration::getRestrictedFieldsByUserRole();
     }
@@ -27,12 +27,12 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaTypeResolverDecorator
     {
         $mandatoryDirectivesForFields = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $configuredEntryList = ComponentConfiguration::getRestrictedFieldsByUserRole();
+        $entryList = ComponentConfiguration::getRestrictedFieldsByUserRole();
         $directiveName = ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::getDirectiveName();
         // Obtain all roles allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
             if ($matchingEntries = $this->getMatchingEntriesFromConfiguration(
-                $configuredEntryList,
+                $entryList,
                 $typeResolver,
                 $fieldName
             )) {

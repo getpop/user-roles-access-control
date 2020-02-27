@@ -12,7 +12,7 @@ class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHook
      *
      * @return array
      */
-    protected function getConfiguredEntryList(): array
+    protected function getEntryList(): array
     {
         return ComponentConfiguration::getRestrictedDirectivesByUserCapability();
     }

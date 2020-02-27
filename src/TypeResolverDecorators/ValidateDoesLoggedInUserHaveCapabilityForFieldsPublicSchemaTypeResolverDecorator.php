@@ -12,7 +12,7 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDec
 {
     use ValidateConditionForFieldsPublicSchemaTypeResolverDecoratorTrait;
 
-    protected static function getConfiguredEntryList(): array
+    protected static function getEntryList(): array
     {
         return ComponentConfiguration::getRestrictedFieldsByUserCapability();
     }
@@ -27,12 +27,12 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDec
     {
         $mandatoryDirectivesForFields = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $configuredEntryList = ComponentConfiguration::getRestrictedFieldsByUserCapability();
+        $entryList = ComponentConfiguration::getRestrictedFieldsByUserCapability();
         $directiveName = ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::getDirectiveName();
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
             if ($matchingEntries = $this->getMatchingEntriesFromConfiguration(
-                $configuredEntryList,
+                $entryList,
                 $typeResolver,
                 $fieldName
             )) {
