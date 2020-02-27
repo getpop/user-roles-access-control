@@ -3,6 +3,8 @@ namespace PoP\UserRolesAccessControl\Hooks;
 
 use PoP\UserRolesAccessControl\ComponentConfiguration;
 use PoP\UserRolesAccessControl\Helpers\UserRoleHelper;
+use PoP\AccessControl\Facades\AccessControlManagerFacade;
+use PoP\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\UserRolesAccessControl\Hooks\AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivateSchemaHookSet;
 
 class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet extends AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivateSchemaHookSet
@@ -14,7 +16,9 @@ class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHook
      */
     protected function getEntryList(): array
     {
-        return ComponentConfiguration::getRestrictedDirectivesByUserCapability();
+        $accessControlManager = AccessControlManagerFacade::getInstance();
+        return $accessControlManager->getEntriesForDirectives(AccessControlGroups::CAPABILITIES);
+        // return ComponentConfiguration::getRestrictedDirectivesByUserCapability();
     }
 
     /**

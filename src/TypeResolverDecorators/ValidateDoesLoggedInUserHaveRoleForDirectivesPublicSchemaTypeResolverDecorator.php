@@ -2,7 +2,9 @@
 namespace PoP\UserRolesAccessControl\TypeResolverDecorators;
 
 use PoP\UserRolesAccessControl\ComponentConfiguration;
+use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
@@ -14,7 +16,9 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecor
 
     protected function getEntryList(): array
     {
-        return ComponentConfiguration::getRestrictedDirectivesByUserRole();
+        $accessControlManager = AccessControlManagerFacade::getInstance();
+        return $accessControlManager->getEntriesForDirectives(AccessControlGroups::ROLES);
+        // return ComponentConfiguration::getRestrictedDirectivesByUserRole();
     }
 
     /**
@@ -27,7 +31,7 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecor
     {
         $mandatoryDirectivesForDirectives = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $entryList = ComponentConfiguration::getRestrictedDirectivesByUserRole();
+        $entryList = static::getEntryList();
         $directiveName = ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::getDirectiveName();
         $directiveResolverClassRoles = [];
         foreach ($entryList as $entry) {

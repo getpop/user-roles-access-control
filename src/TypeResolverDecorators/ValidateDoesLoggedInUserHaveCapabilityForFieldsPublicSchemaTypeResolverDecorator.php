@@ -2,7 +2,9 @@
 namespace PoP\UserRolesAccessControl\TypeResolverDecorators;
 
 use PoP\UserRolesAccessControl\ComponentConfiguration;
+use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
@@ -14,7 +16,9 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDec
 
     protected static function getEntryList(): array
     {
-        return ComponentConfiguration::getRestrictedFieldsByUserCapability();
+        $accessControlManager = AccessControlManagerFacade::getInstance();
+        return $accessControlManager->getEntriesForFields(AccessControlGroups::CAPABILITIES);
+        // return ComponentConfiguration::getRestrictedFieldsByUserCapability();
     }
 
     /**
@@ -27,7 +31,7 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDec
     {
         $mandatoryDirectivesForFields = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $entryList = ComponentConfiguration::getRestrictedFieldsByUserCapability();
+        $entryList = static::getEntryList();
         $directiveName = ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::getDirectiveName();
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {

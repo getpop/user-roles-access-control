@@ -2,7 +2,9 @@
 namespace PoP\UserRolesAccessControl\TypeResolverDecorators;
 
 use PoP\UserRolesAccessControl\ComponentConfiguration;
+use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
@@ -14,7 +16,9 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaTypeResolve
 
     protected function getEntryList(): array
     {
-        return ComponentConfiguration::getRestrictedDirectivesByUserCapability();
+        $accessControlManager = AccessControlManagerFacade::getInstance();
+        return $accessControlManager->getEntriesForDirectives(AccessControlGroups::CAPABILITIES);
+        // return ComponentConfiguration::getRestrictedDirectivesByUserCapability();
     }
 
     /**

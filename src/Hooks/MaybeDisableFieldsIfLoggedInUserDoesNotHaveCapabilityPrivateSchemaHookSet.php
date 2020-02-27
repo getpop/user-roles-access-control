@@ -3,10 +3,12 @@ namespace PoP\UserRolesAccessControl\Hooks;
 
 use PoP\UserRolesAccessControl\ComponentConfiguration;
 use PoP\UserRolesAccessControl\Helpers\UserRoleHelper;
+use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use PoP\UserStateAccessControl\Hooks\AbstractMaybeDisableFieldsIfUserNotLoggedInPrivateSchemaHookSet;
 use PoP\UserStateAccessControl\Hooks\MaybeDisableFieldsIfConditionPrivateSchemaHookSetTrait;
+use PoP\UserStateAccessControl\Hooks\AbstractMaybeDisableFieldsIfUserNotLoggedInPrivateSchemaHookSet;
 
 class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet extends AbstractMaybeDisableFieldsIfUserNotLoggedInPrivateSchemaHookSet
 {
@@ -19,7 +21,9 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet 
      */
     protected static function getEntryList(): array
     {
-        return ComponentConfiguration::getRestrictedFieldsByUserCapability();
+        $accessControlManager = AccessControlManagerFacade::getInstance();
+        return $accessControlManager->getEntriesForFields(AccessControlGroups::CAPABILITIES);
+        // return ComponentConfiguration::getRestrictedFieldsByUserCapability();
     }
 
     /**
@@ -40,7 +44,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet 
 
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         if ($matchingEntries = $this->getMatchingEntriesFromConfiguration(
-            ComponentConfiguration::getRestrictedFieldsByUserCapability(),
+            static::getEntryList(),
             $typeResolver,
             $fieldName
         )) {

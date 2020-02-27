@@ -2,7 +2,9 @@
 namespace PoP\UserRolesAccessControl\TypeResolverDecorators;
 
 use PoP\UserRolesAccessControl\ComponentConfiguration;
+use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
@@ -14,7 +16,9 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaTypeResolverDecorator
 
     protected static function getEntryList(): array
     {
-        return ComponentConfiguration::getRestrictedFieldsByUserRole();
+        $accessControlManager = AccessControlManagerFacade::getInstance();
+        return $accessControlManager->getEntriesForFields(AccessControlGroups::ROLES);
+        // return ComponentConfiguration::getRestrictedFieldsByUserRole();
     }
 
     /**
@@ -27,7 +31,7 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaTypeResolverDecorator
     {
         $mandatoryDirectivesForFields = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $entryList = ComponentConfiguration::getRestrictedFieldsByUserRole();
+        $entryList = static::getEntryList();
         $directiveName = ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::getDirectiveName();
         // Obtain all roles allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
