@@ -25,24 +25,19 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecor
      * @param TypeResolverInterface $typeResolver
      * @return array
      */
-    public function getMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
+    protected function getMandatoryDirectives($entryValue = null): array
     {
-        $mandatoryDirectivesForDirectives = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $directiveName = ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::getDirectiveName();
-        foreach ($this->getEntries() as $entry) {
-            $directiveResolverClass = $entry[0];
-            $roles = $entry[1];
-            $validateDoesLoggedInUserHaveAnyRoleDirective = $fieldQueryInterpreter->getDirective(
-                $directiveName,
-                [
-                    'roles' => $roles,
-                ]
-            );
-            $mandatoryDirectivesForDirectives[$directiveResolverClass::getDirectiveName()] = [
-                $validateDoesLoggedInUserHaveAnyRoleDirective,
-            ];
-        }
-        return $mandatoryDirectivesForDirectives;
+        $roles = $entryValue;
+        $validateDoesLoggedInUserHaveAnyRoleDirective = $fieldQueryInterpreter->getDirective(
+            $directiveName,
+            [
+                'roles' => $roles,
+            ]
+        );
+        return [
+            $validateDoesLoggedInUserHaveAnyRoleDirective,
+        ];
     }
 }

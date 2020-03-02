@@ -25,24 +25,19 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaTypeResolve
      * @param TypeResolverInterface $typeResolver
      * @return array
      */
-    public function getMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
+    protected function getMandatoryDirectives($entryValue = null): array
     {
-        $mandatoryDirectivesForDirectives = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $directiveName = ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::getDirectiveName();
-        foreach ($this->getEntries() as $entry) {
-            $directiveResolverClass = $entry[0];
-            $capabilities = $entry[1];
-            $validateDoesLoggedInUserHaveAnyCapabilityDirective = $fieldQueryInterpreter->getDirective(
-                $directiveName,
-                [
-                    'capabilities' => $capabilities,
-                ]
-            );
-            $mandatoryDirectivesForDirectives[$directiveResolverClass::getDirectiveName()] = [
-                $validateDoesLoggedInUserHaveAnyCapabilityDirective,
-            ];
-        }
-        return $mandatoryDirectivesForDirectives;
+        $capabilities = $entryValue;
+        $validateDoesLoggedInUserHaveAnyCapabilityDirective = $fieldQueryInterpreter->getDirective(
+            $directiveName,
+            [
+                'capabilities' => $capabilities,
+            ]
+        );
+        return [
+            $validateDoesLoggedInUserHaveAnyCapabilityDirective,
+        ];
     }
 }
