@@ -19,7 +19,6 @@ abstract class AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaTyp
     public function getMandatoryDirectivesForFields(TypeResolverInterface $typeResolver): array
     {
         $mandatoryDirectivesForFields = [];
-        $entryList = static::getEntryList();
         $noCacheControlDirective = CacheControlHelper::getNoCacheDirective();
         foreach ($this->getFieldNames() as $fieldName) {
             if ($matchingEntries = $this->getEntries(
