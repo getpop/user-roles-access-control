@@ -2,7 +2,6 @@
 namespace PoP\UserRolesAccessControl\Conditional\CacheControl\TypeResolverDecorators;
 
 use PoP\CacheControl\Helpers\CacheControlHelper;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPrivateSchemaTypeResolverDecorator;
 use PoP\AccessControl\TypeResolverDecorators\ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
 
@@ -10,28 +9,10 @@ abstract class AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaTyp
 {
     use ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
 
-    /**
-     * By default, only the admin can see the roles from the users
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return array
-     */
-    public function getMandatoryDirectivesForFields(TypeResolverInterface $typeResolver): array
+    protected function getMandatoryDirectives($entryValues = null): array
     {
-        $mandatoryDirectivesForFields = [];
-        $noCacheControlDirective = CacheControlHelper::getNoCacheDirective();
-        foreach ($this->getFieldNames() as $fieldName) {
-            if ($matchingEntries = $this->getEntries(
-                $typeResolver,
-                $fieldName
-            )) {
-                foreach ($matchingEntries as $entry) {
-                    if ($items = $entry[2]) {
-                        $mandatoryDirectivesForFields[$fieldName][] = $noCacheControlDirective;
-                    }
-                }
-            }
-        }
-        return $mandatoryDirectivesForFields;
+        return [
+            CacheControlHelper::getNoCacheDirective(),
+        ];
     }
 }

@@ -25,29 +25,18 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDec
      * @param TypeResolverInterface $typeResolver
      * @return array
      */
-    public function getMandatoryDirectivesForFields(TypeResolverInterface $typeResolver): array
+    protected function getMandatoryDirectives($entryValue = null): array
     {
-        $mandatoryDirectivesForFields = [];
+        $capabilities = $entryValue;
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $directiveName = ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::getDirectiveName();
-        // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
-        foreach ($this->getFieldNames() as $fieldName) {
-            if ($matchingEntries = $this->getEntries(
-                $typeResolver,
-                $fieldName
-            )) {
-                foreach ($matchingEntries as $entry) {
-                    if ($capabilities = $entry[2]) {
-                        $mandatoryDirectivesForFields[$fieldName][] = $fieldQueryInterpreter->getDirective(
-                            $directiveName,
-                            [
-                                'capabilities' => $capabilities,
-                            ]
-                        );
-                    }
-                }
-            }
-        }
-        return $mandatoryDirectivesForFields;
+        return [
+            $fieldQueryInterpreter->getDirective(
+                $directiveName,
+                [
+                    'capabilities' => $capabilities,
+                ]
+            ),
+        ];
     }
 }
