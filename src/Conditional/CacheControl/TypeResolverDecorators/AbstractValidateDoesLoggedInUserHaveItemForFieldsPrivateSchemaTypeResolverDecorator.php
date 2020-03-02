@@ -22,8 +22,7 @@ abstract class AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaTyp
         $entryList = static::getEntryList();
         $noCacheControlDirective = CacheControlHelper::getNoCacheDirective();
         foreach ($this->getFieldNames() as $fieldName) {
-            if ($matchingEntries = $this->getMatchingEntriesFromConfiguration(
-                $entryList,
+            if ($matchingEntries = $this->getMatchingEntries(
                 $typeResolver,
                 $fieldName
             )) {

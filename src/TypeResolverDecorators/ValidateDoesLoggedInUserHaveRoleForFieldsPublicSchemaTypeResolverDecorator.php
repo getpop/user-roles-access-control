@@ -29,12 +29,10 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaTypeResolverDecorator
     {
         $mandatoryDirectivesForFields = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $entryList = static::getEntryList();
         $directiveName = ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::getDirectiveName();
         // Obtain all roles allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
-            if ($matchingEntries = $this->getMatchingEntriesFromConfiguration(
-                $entryList,
+            if ($matchingEntries = $this->getMatchingEntries(
                 $typeResolver,
                 $fieldName
             )) {
