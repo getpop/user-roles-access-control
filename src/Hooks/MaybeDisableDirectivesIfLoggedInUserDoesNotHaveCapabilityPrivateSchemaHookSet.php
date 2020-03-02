@@ -13,7 +13,7 @@ class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHook
      *
      * @return array
      */
-    protected function getEntryList(): array
+    protected function getConfigurationEntries(): array
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForDirectives(AccessControlGroups::CAPABILITIES);

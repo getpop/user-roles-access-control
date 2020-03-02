@@ -7,7 +7,7 @@ use PoP\UserRolesAccessControl\Conditional\CacheControl\TypeResolverDecorators\A
 
 class ValidateDoesLoggedInUserHaveRoleForDirectivesPrivateSchemaTypeResolverDecorator extends AbstractValidateDoesLoggedInUserHaveItemForDirectivesPrivateSchemaTypeResolverDecorator
 {
-    protected function getEntryList(): array
+    protected function getConfigurationEntries(): array
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForDirectives(AccessControlGroups::ROLES);

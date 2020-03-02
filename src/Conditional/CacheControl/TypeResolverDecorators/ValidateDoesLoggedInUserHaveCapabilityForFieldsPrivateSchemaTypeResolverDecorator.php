@@ -7,7 +7,7 @@ use PoP\UserRolesAccessControl\Conditional\CacheControl\TypeResolverDecorators\A
 
 class ValidateDoesLoggedInUserHaveCapabilityForFieldsPrivateSchemaTypeResolverDecorator extends AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaTypeResolverDecorator
 {
-    protected static function getEntryList(): array
+    protected static function getConfigurationEntries(): array
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForFields(AccessControlGroups::CAPABILITIES);

@@ -13,7 +13,7 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecor
 {
     use ValidateConditionForDirectivesTypeResolverDecoratorTrait;
 
-    protected function getEntryList(): array
+    protected function getConfigurationEntries(): array
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForDirectives(AccessControlGroups::ROLES);
@@ -29,7 +29,7 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecor
     {
         $mandatoryDirectivesForDirectives = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $entryList = static::getEntryList();
+        $entryList = static::getConfigurationEntries();
         $directiveName = ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::getDirectiveName();
         foreach ($entryList as $entry) {
             $directiveResolverClass = $entry[0];

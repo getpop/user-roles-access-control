@@ -18,7 +18,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extend
      *
      * @return array
      */
-    protected static function getEntryList(): array
+    protected static function getConfigurationEntries(): array
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForFields(AccessControlGroups::ROLES);
