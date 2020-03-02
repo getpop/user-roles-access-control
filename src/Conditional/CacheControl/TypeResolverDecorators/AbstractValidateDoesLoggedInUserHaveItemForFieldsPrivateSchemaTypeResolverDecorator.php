@@ -2,13 +2,10 @@
 namespace PoP\UserRolesAccessControl\Conditional\CacheControl\TypeResolverDecorators;
 
 use PoP\CacheControl\Helpers\CacheControlHelper;
-use PoP\AccessControl\TypeResolverDecorators\AbstractPrivateSchemaTypeResolverDecorator;
-use PoP\AccessControl\TypeResolverDecorators\ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
+use PoP\AccessControl\TypeResolverDecorators\AbstractConfigurableAccessControlForFieldsInPrivateSchemaTypeResolverDecorator;
 
-abstract class AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaTypeResolverDecorator extends AbstractPrivateSchemaTypeResolverDecorator
+abstract class AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaTypeResolverDecorator extends AbstractConfigurableAccessControlForFieldsInPrivateSchemaTypeResolverDecorator
 {
-    use ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
-
     protected function getMandatoryDirectives($entryValues = null): array
     {
         return [
