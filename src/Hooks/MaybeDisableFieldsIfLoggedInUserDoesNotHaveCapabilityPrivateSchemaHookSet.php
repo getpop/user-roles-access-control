@@ -41,7 +41,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet 
         }
 
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
-        if ($matchingEntries = $this->getMatchingEntries(
+        if ($matchingEntries = $this->getEntries(
             $typeResolver,
             $fieldName
         )) {

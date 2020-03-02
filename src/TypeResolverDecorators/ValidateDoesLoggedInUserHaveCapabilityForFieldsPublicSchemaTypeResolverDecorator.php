@@ -32,7 +32,7 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDec
         $directiveName = ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::getDirectiveName();
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
-            if ($matchingEntries = $this->getMatchingEntries(
+            if ($matchingEntries = $this->getEntries(
                 $typeResolver,
                 $fieldName
             )) {
