@@ -10,8 +10,6 @@ abstract class AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaTyp
 {
     use ValidateConditionForFieldsTypeResolverDecoratorTrait;
 
-    abstract protected static function getEntryList(): array;
-
     /**
      * By default, only the admin can see the roles from the users
      *

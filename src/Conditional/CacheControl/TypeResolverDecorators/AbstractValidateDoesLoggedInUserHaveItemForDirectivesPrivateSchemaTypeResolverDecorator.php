@@ -10,8 +10,6 @@ abstract class AbstractValidateDoesLoggedInUserHaveItemForDirectivesPrivateSchem
 {
     use ValidateConditionForDirectivesTypeResolverDecoratorTrait;
 
-    abstract protected function getEntryList(): array;
-
     /**
      * By default, only the admin can see the capabilities from the users
      *

@@ -14,13 +14,6 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
     }
 
     /**
-     * Configuration entries
-     *
-     * @return array
-     */
-    abstract protected function getEntryList(): array;
-
-    /**
      * Indicate if the user has the item, to be implemented
      *
      * @param string $item
