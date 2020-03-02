@@ -19,9 +19,8 @@ abstract class AbstractValidateDoesLoggedInUserHaveItemForDirectivesPrivateSchem
     public function getMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {
         $mandatoryDirectivesForDirectives = [];
-        $entryList = $this->getConfigurationEntries();
         $noCacheControlDirective = CacheControlHelper::getNoCacheDirective();
-        foreach ($entryList as $entry) {
+        foreach ($this->getEntries() as $entry) {
             $directiveResolverClass = $entry[0];
             $mandatoryDirectivesForDirectives[$directiveResolverClass::getDirectiveName()] = [
                 $noCacheControlDirective,
