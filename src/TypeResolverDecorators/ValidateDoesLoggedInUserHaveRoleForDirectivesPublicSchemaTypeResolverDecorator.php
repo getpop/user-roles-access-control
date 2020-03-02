@@ -5,14 +5,11 @@ use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
+use PoP\AccessControl\TypeResolverDecorators\AbstractConfigurableAccessControlForDirectivesInPublicSchemaTypeResolverDecorator;
 use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
-use PoP\AccessControl\TypeResolverDecorators\ValidateConditionForDirectivesTypeResolverDecoratorTrait;
 
-class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
+class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaTypeResolverDecorator
 {
-    use ValidateConditionForDirectivesTypeResolverDecoratorTrait;
-
     protected function getConfigurationEntries(): array
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();

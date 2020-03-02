@@ -2,14 +2,11 @@
 namespace PoP\UserRolesAccessControl\Conditional\CacheControl\TypeResolverDecorators;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\AccessControl\TypeResolverDecorators\AbstractPrivateSchemaTypeResolverDecorator;
+use PoP\AccessControl\TypeResolverDecorators\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaTypeResolverDecorator;
 use PoP\CacheControl\Helpers\CacheControlHelper;
-use PoP\AccessControl\TypeResolverDecorators\ValidateConditionForDirectivesTypeResolverDecoratorTrait;
 
-abstract class AbstractValidateDoesLoggedInUserHaveItemForDirectivesPrivateSchemaTypeResolverDecorator extends AbstractPrivateSchemaTypeResolverDecorator
+abstract class AbstractValidateDoesLoggedInUserHaveItemForDirectivesPrivateSchemaTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPrivateSchemaTypeResolverDecorator
 {
-    use ValidateConditionForDirectivesTypeResolverDecoratorTrait;
-
     /**
      * By default, only the admin can see the capabilities from the users
      *
