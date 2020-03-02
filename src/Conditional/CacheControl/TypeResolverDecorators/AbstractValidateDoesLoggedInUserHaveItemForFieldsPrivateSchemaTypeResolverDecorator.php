@@ -1,15 +1,10 @@
 <?php
 namespace PoP\UserRolesAccessControl\Conditional\CacheControl\TypeResolverDecorators;
 
-use PoP\CacheControl\Helpers\CacheControlHelper;
 use PoP\AccessControl\TypeResolverDecorators\AbstractConfigurableAccessControlForFieldsInPrivateSchemaTypeResolverDecorator;
+use PoP\UserStateAccessControl\Conditional\CacheControl\TypeResolverDecorators\NoCacheConfigurableAccessControlTypeResolverDecoratorTrait;
 
 abstract class AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaTypeResolverDecorator extends AbstractConfigurableAccessControlForFieldsInPrivateSchemaTypeResolverDecorator
 {
-    protected function getMandatoryDirectives($entryValues = null): array
-    {
-        return [
-            CacheControlHelper::getNoCacheDirective(),
-        ];
-    }
+    use NoCacheConfigurableAccessControlTypeResolverDecoratorTrait;
 }
