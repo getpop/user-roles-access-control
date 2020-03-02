@@ -4,11 +4,11 @@ namespace PoP\UserRolesAccessControl\Conditional\CacheControl\TypeResolverDecora
 use PoP\CacheControl\Helpers\CacheControlHelper;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPrivateSchemaTypeResolverDecorator;
-use PoP\AccessControl\TypeResolverDecorators\ValidateConditionForFieldsTypeResolverDecoratorTrait;
+use PoP\AccessControl\TypeResolverDecorators\ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
 
 abstract class AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaTypeResolverDecorator extends AbstractPrivateSchemaTypeResolverDecorator
 {
-    use ValidateConditionForFieldsTypeResolverDecoratorTrait;
+    use ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
 
     /**
      * By default, only the admin can see the roles from the users
