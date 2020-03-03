@@ -6,12 +6,12 @@ use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use PoP\AccessControl\ConfigurationEntries\ConfigurableAccessControlForFieldsTrait;
+use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 use PoP\UserStateAccessControl\Hooks\AbstractDisableFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSchemaHookSet;
 
 class MaybeDisableFieldsIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extends AbstractDisableFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSchemaHookSet
 {
-    use ConfigurableAccessControlForFieldsTrait;
+    use ConfigurableMandatoryDirectivesForFieldsTrait;
 
     protected function enabled(): bool
     {
