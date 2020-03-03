@@ -1,13 +1,9 @@
 <?php
 namespace PoP\UserRolesAccessControl\TypeResolverDecorators;
 
-use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
-use PoP\AccessControl\TypeResolverDecorators\ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
 
 trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaTypeResolverDecoratorTrait
 {
