@@ -22,7 +22,7 @@ class ConditionalComponent
      *
      * @return void
      */
-    public static function boot()
+    public static function reallyBoot()
     {
         // Initialize classes
         ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__.'\\TypeResolverDecorators');
