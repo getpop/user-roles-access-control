@@ -12,7 +12,8 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveReso
 class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
     const DIRECTIVE_NAME = 'validateDoesLoggedInUserHaveAnyRole';
-    public static function getDirectiveName(): string {
+    public static function getDirectiveName(): string
+    {
         return self::DIRECTIVE_NAME;
     }
 
