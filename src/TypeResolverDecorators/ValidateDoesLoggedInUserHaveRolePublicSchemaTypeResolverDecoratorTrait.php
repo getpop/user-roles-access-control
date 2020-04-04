@@ -15,9 +15,10 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaTypeResolverDecoratorTrait
      */
     protected function getMandatoryDirectives($entryValue = null): array
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $directiveName = ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::getDirectiveName();
         $roles = $entryValue;
+        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
+        $directiveResoverClass = $this->getValidateRoleDirectiveResolverClass();
+        $directiveName = $directiveResoverClass::getDirectiveName();
         $validateDoesLoggedInUserHaveAnyRoleDirective = $fieldQueryInterpreter->getDirective(
             $directiveName,
             [
@@ -28,4 +29,6 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaTypeResolverDecoratorTrait
             $validateDoesLoggedInUserHaveAnyRoleDirective,
         ];
     }
+
+    abstract protected function getValidateRoleDirectiveResolverClass(): string;
 }

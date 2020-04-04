@@ -3,6 +3,7 @@ namespace PoP\UserRolesAccessControl\TypeResolverDecorators;
 
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\UserRolesAccessControl\Services\AccessControlGroups;
+use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver;
 use PoP\AccessControl\TypeResolverDecorators\AbstractConfigurableAccessControlForDirectivesInPublicSchemaTypeResolverDecorator;
 
 class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaTypeResolverDecorator
@@ -13,5 +14,10 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaTypeResolverDecor
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForDirectives(AccessControlGroups::ROLES);
+    }
+
+    protected function getValidateRoleDirectiveResolverClass(): string
+    {
+        return ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver::class;
     }
 }

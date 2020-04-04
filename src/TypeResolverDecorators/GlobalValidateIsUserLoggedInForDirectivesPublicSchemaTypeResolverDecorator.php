@@ -3,8 +3,8 @@ namespace PoP\UserRolesAccessControl\TypeResolverDecorators;
 
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\UserStateAccessControl\TypeResolverDecorators\AbstractValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolverDecorator;
-use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
-use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
+use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver;
+use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver;
 
 class GlobalValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolverDecorator extends AbstractValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolverDecorator
 {
@@ -23,8 +23,8 @@ class GlobalValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolverDecorator
     protected function getDirectiveResolverClasses(): array
     {
         return [
-            ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::class,
-            ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::class,
+            ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver::class,
+            ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver::class,
         ];
     }
 }

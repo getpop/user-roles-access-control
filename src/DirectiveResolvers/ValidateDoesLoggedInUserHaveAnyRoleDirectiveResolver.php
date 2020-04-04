@@ -36,11 +36,18 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
     {
         $roles = $this->directiveArgsForSchema['roles'];
         $translationAPI = TranslationAPIFacade::getInstance();
-        $message = count($roles) == 1 ?
-            $translationAPI->__('You must have role \'%s\' to access field(s) \'%s\'', 'user-roles') :
-            $translationAPI->__('You must have any role from among \'%s\' to access field(s) \'%s\'', 'user-roles');
+        $isValidatingDirective = $this->isValidatingDirective();
+        if (count($roles) == 1) {
+            $errorMessage = $isValidatingDirective ?
+                $translationAPI->__('You must have role \'%s\' to access directives in field(s) \'%s\'', 'user-roles') :
+                $translationAPI->__('You must have role \'%s\' to access field(s) \'%s\'', 'user-roles');
+        } else {
+            $errorMessage = $isValidatingDirective ?
+                $translationAPI->__('You must have any role from among \'%s\' to access directives in field(s) \'%s\'', 'user-roles') :
+                $translationAPI->__('You must have any role from among \'%s\' to access field(s) \'%s\'', 'user-roles');
+        }
         return sprintf(
-            $message,
+            $errorMessage,
             implode(
                 $translationAPI->__('\', \''),
                 $roles
