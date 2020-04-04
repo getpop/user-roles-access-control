@@ -1,7 +1,7 @@
 <?php
 namespace PoP\UserRolesAccessControl\DirectiveResolvers;
 
-use PoP\ComponentModel\Engine_Vars;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -19,7 +19,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
 
     protected function validateCondition(TypeResolverInterface $typeResolver): bool
     {
-        $vars = Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         // If the user is not logged-in, then do nothing: directive `@validateIsUserLoggedIn` will already fail
         if (!$vars['global-userstate']['is-user-logged-in']) {
             return true;
