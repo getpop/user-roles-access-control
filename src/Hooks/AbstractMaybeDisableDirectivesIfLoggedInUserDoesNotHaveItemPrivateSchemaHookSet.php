@@ -3,6 +3,7 @@ namespace PoP\UserRolesAccessControl\Hooks;
 
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet;
+use PoP\AccessControl\Environment;
 
 abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivateSchemaHookSet extends AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet
 {
@@ -21,6 +22,21 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
      */
     abstract protected function doesCurrentUserHaveAnyItem(array $items): bool;
 
+    protected function isPublicPrivateSchemaModeValidForEntry(?string $entryIndividualSchemaMode): bool
+    {
+        if (!Environment::enableIndividualControlForPublicPrivateSchemaMode()) {
+            return true;
+        }
+        $individualControlSchemaMode = $this->getSchemaMode();
+        return
+            $entryIndividualSchemaMode == $individualControlSchemaMode ||
+            (
+                is_null($entryIndividualSchemaMode) &&
+                $this->doesSchemaModeProcessNullControlEntry()
+            );
+    }
+
+
     /**
      * Remove directiveName "translate" if the user is not logged in
      *
@@ -35,20 +51,23 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
             $entries = $this->getEntries();
             // If the user is not logged in, then it's all directives
             $vars = ApplicationState::getVars();
+            $this->directiveResolverClasses = [];
             if (!$vars['global-userstate']['is-user-logged-in']) {
-                $this->directiveResolverClasses = array_values(array_unique(array_map(
-                    function($entry) {
-                        return $entry[0];
-                    },
-                    $entries
-                )));
+                foreach ($entries as $entry) {
+                    $directiveResolverClass = $entry[0];
+                    if ($this->isPublicPrivateSchemaModeValidForEntry($entry[2])) {
+                        $this->directiveResolverClasses[] = $directiveResolverClass;
+                    }
+                }
             } else {
                 // For each entry, validate if the current user has any of those items (roles/capabilities). If not, the directive must be removed
-                $this->directiveResolverClasses = [];
                 foreach ($entries as $entry) {
                     $directiveResolverClass = $entry[0];
                     $items = $entry[1];
-                    if (!$this->doesCurrentUserHaveAnyItem($items)) {
+                    if (
+                        !$this->doesCurrentUserHaveAnyItem($items) &&
+                        $this->isPublicPrivateSchemaModeValidForEntry($entry[2])
+                    ) {
                         $this->directiveResolverClasses[] = $directiveResolverClass;
                     }
                 }
