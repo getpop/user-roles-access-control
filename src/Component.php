@@ -47,8 +47,8 @@ class Component extends AbstractComponent
         parent::beforeBoot();
 
         // Initialize classes
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__.'\\Hooks');
-        ContainerBuilderUtils::attachAndRegisterDirectiveResolversFromNamespace(__NAMESPACE__.'\\DirectiveResolvers');// Boot conditional on API package being installed
+        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
+        ContainerBuilderUtils::attachAndRegisterDirectiveResolversFromNamespace(__NAMESPACE__ . '\\DirectiveResolvers');// Boot conditional on API package being installed
     }
 
     /**
@@ -61,7 +61,7 @@ class Component extends AbstractComponent
         parent::afterBoot();
 
         // Initialize classes
-        ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__.'\\TypeResolverDecorators');
+        ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators');
 
         if (class_exists('\PoP\CacheControl\Component')) {
             \PoP\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::afterBoot();

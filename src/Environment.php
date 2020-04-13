@@ -4,4 +4,3 @@ namespace PoP\UserRolesAccessControl;
 class Environment
 {
 }
-
