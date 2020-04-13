@@ -30,8 +30,6 @@ $ composer require getpop/user-roles-access-control dev-master
 }
 ```
 
-([PoP](https://github.com/leoloso/PoP) must be installed)
-
 <!--
 ## Usage
 
