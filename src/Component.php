@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace PoP\UserRolesAccessControl;
 
 use PoP\AccessControl\Component as AccessControlComponent;

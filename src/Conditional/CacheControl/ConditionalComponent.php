@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace PoP\UserRolesAccessControl\Conditional\CacheControl;
 
 use PoP\Root\Component\YAMLServicesTrait;

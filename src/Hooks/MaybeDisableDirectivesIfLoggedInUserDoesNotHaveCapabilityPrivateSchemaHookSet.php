@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace PoP\UserRolesAccessControl\Hooks;
 
 use PoP\UserRolesAccessControl\Helpers\UserRoleHelper;
