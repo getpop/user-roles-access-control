@@ -42,12 +42,12 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         $isValidatingDirective = $this->isValidatingDirective();
         if (count($capabilities) == 1) {
             $errorMessage = $isValidatingDirective ?
-                $translationAPI->__('You must have capability \'%s\' to access directives in field(s) \'%s\'', 'user-roles') :
-                $translationAPI->__('You must have capability \'%s\' to access field(s) \'%s\'', 'user-roles');
+                $translationAPI->__('You must have capability \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
+                $translationAPI->__('You must have capability \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
         } else {
             $errorMessage = $isValidatingDirective ?
-                $translationAPI->__('You must have any capability from among \'%s\' to access directives in field(s) \'%s\'', 'user-roles') :
-                $translationAPI->__('You must have any capability from among \'%s\' to access field(s) \'%s\'', 'user-roles');
+                $translationAPI->__('You must have any capability from among \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
+                $translationAPI->__('You must have any capability from among \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
         }
         return sprintf(
             $errorMessage,
@@ -58,7 +58,8 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
             implode(
                 $translationAPI->__('\', \''),
                 $failedDataFields
-            )
+            ),
+            $typeResolver->getMaybeNamespacedTypeName()
         );
     }
 

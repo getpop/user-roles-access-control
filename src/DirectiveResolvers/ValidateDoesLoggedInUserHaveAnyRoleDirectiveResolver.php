@@ -42,12 +42,12 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         $isValidatingDirective = $this->isValidatingDirective();
         if (count($roles) == 1) {
             $errorMessage = $isValidatingDirective ?
-                $translationAPI->__('You must have role \'%s\' to access directives in field(s) \'%s\'', 'user-roles') :
-                $translationAPI->__('You must have role \'%s\' to access field(s) \'%s\'', 'user-roles');
+                $translationAPI->__('You must have role \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
+                $translationAPI->__('You must have role \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
         } else {
             $errorMessage = $isValidatingDirective ?
-                $translationAPI->__('You must have any role from among \'%s\' to access directives in field(s) \'%s\'', 'user-roles') :
-                $translationAPI->__('You must have any role from among \'%s\' to access field(s) \'%s\'', 'user-roles');
+                $translationAPI->__('You must have any role from among \'%s\' to access directives in field(s) \'%s\' for type \'%s\'', 'user-roles') :
+                $translationAPI->__('You must have any role from among \'%s\' to access field(s) \'%s\' for type \'%s\'', 'user-roles');
         }
         return sprintf(
             $errorMessage,
@@ -58,7 +58,8 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
             implode(
                 $translationAPI->__('\', \''),
                 $failedDataFields
-            )
+            ),
+            $typeResolver->getMaybeNamespacedTypeName()
         );
     }
 
