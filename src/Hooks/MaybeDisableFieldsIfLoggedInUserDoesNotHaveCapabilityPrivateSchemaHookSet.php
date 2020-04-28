@@ -63,8 +63,9 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet 
             $fieldName
         )) {
             foreach ($matchingEntries as $entry) {
-                // Check if the current user has any of the required capabilities, then access is granted, otherwise reject it
-                $capabilities = $entry[2];
+                // Check if the current user has any of the required capabilities,
+                // then access is granted, otherwise reject it
+                $capabilities = $entry[2] ?? [];
                 if (!UserRoleHelper::doesCurrentUserHaveAnyCapability($capabilities)) {
                     return true;
                 }

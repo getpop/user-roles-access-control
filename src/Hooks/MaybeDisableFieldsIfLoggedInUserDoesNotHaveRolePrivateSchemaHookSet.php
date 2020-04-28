@@ -64,7 +64,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extend
         )) {
             foreach ($matchingEntries as $entry) {
                 // Check if the current user has any of the required roles, then access is granted, otherwise reject it
-                $roles = $entry[2];
+                $roles = $entry[2] ?? [];
                 if (!UserRoleHelper::doesCurrentUserHaveAnyRole($roles)) {
                     return true;
                 }

@@ -50,7 +50,7 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
                 $this->directiveResolverClasses = [];
                 foreach ($entries as $entry) {
                     $directiveResolverClass = $entry[0];
-                    $items = $entry[1];
+                    $items = $entry[1] ?? [];
                     if (!$this->doesCurrentUserHaveAnyItem($items)) {
                         $this->directiveResolverClasses[] = $directiveResolverClass;
                     }
