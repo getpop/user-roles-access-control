@@ -1,2 +1,2 @@
 <?php
-\PoP\UserRolesAccessControl\Component::init();
+//\PoP\UserRolesAccessControl\Component::initialize();
