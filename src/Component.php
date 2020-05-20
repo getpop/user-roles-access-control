@@ -50,7 +50,7 @@ class Component extends AbstractComponent
             self::initYAMLServices(self::$COMPONENT_DIR);
 
             if (class_exists('\PoP\CacheControl\Component')) {
-                \PoP\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::init();
+                \PoP\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::initialize();
             }
         }
     }
