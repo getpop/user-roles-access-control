@@ -28,6 +28,18 @@ class Component extends AbstractComponent
     }
 
     /**
+     * All conditional component classes that this component depends upon, to initialize them
+     *
+     * @return array
+     */
+    public static function getDependedConditionalComponentClasses(): array
+    {
+        return [
+            \PoP\CacheControl\Component::class,
+        ];
+    }
+
+    /**
      * Initialize services
      */
     public static function init()
