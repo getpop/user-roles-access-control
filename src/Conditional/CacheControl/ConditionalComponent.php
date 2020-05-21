@@ -25,7 +25,7 @@ class ConditionalComponent
      *
      * @return void
      */
-    public static function afterBoot()
+    public static function afterBoot(): void
     {
         // Initialize classes
         ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators');
