@@ -20,12 +20,13 @@ Via Composer
 composer require getpop/user-roles-access-control
 ```
 
-<!--
 ## Usage
 
+Initialize the component:
+
 ``` php
+\PoP\UserRolesAccessControl\Component::initialize();
 ```
--->
 
 ## Standards
 
