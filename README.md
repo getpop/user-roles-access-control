@@ -25,7 +25,9 @@ composer require getpop/user-roles-access-control
 Initialize the component:
 
 ``` php
-\PoP\UserRolesAccessControl\Component::initialize();
+\PoP\Root\ComponentLoader::initializeComponents([
+    \PoP\UserRolesAccessControl\Component::class,
+]);
 ```
 
 ## Standards
