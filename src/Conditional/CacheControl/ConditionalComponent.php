@@ -15,9 +15,9 @@ class ConditionalComponent
 {
     use YAMLServicesTrait;
 
-    public static function initialize()
+    public static function initialize(bool $skipSchema = false): void
     {
-        self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/CacheControl');
+        self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CacheControl');
     }
 
     /**
