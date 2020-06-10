@@ -53,7 +53,9 @@ class Component extends AbstractComponent
             self::initYAMLServices(self::$COMPONENT_DIR);
             self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
 
-            if (class_exists('\PoP\CacheControl\Component')) {
+            if (class_exists('\PoP\CacheControl\Component')
+                && !in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses)
+            ) {
                 \PoP\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::initialize(
                     $configuration,
                     $skipSchema
