@@ -18,14 +18,14 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php" : "~7.1",
+        "php": "~7.2",
         "getpop/user-roles": "dev-master",
         "getpop/user-state-access-control": "dev-master"
     },
     "require-dev": {
         "getpop/cache-control": "dev-master",
         "phpstan/phpstan": "^0.12",
-        "phpunit/phpunit": ">=9.2",
+        "phpunit/phpunit": ">=8.5",
         "squizlabs/php_codesniffer": "^3.0"
     },
     "suggest": {
