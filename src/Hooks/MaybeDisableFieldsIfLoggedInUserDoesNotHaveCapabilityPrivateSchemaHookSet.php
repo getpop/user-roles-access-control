@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoP\UserRolesAccessControl\Hooks;
+namespace PoPSchema\UserRolesAccessControl\Hooks;
 
-use PoP\UserRolesAccessControl\Helpers\UserRoleHelper;
+use PoPSchema\UserRolesAccessControl\Helpers\UserRoleHelper;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\UserRolesAccessControl\Services\AccessControlGroups;
+use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\AccessControl\ConfigurationEntries\AccessControlConfigurableMandatoryDirectivesForFieldsTrait;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
-use PoP\UserStateAccessControl\Hooks\AbstractDisableFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSchemaHookSet;
+use PoPSchema\UserStateAccessControl\Hooks\AbstractDisableFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSchemaHookSet;
 
 class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet extends AbstractDisableFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSchemaHookSet
 {

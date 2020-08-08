@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\UserRolesAccessControl\TypeResolverDecorators;
+namespace PoPSchema\UserRolesAccessControl\TypeResolverDecorators;
 
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
-use PoP\UserRolesAccessControl\Services\AccessControlGroups;
+use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
-use PoP\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
+use PoPSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
 use PoP\AccessControl\TypeResolverDecorators\ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
 
 class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator

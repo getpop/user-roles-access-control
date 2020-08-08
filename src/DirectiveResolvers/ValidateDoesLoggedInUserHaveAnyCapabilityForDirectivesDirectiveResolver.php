@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\UserRolesAccessControl\DirectiveResolvers;
+namespace PoPSchema\UserRolesAccessControl\DirectiveResolvers;
 
 class ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver extends ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver
 {

@@ -1,12 +1,12 @@
 {
-    "name": "getpop/user-roles-access-control",
+    "name": "pop-schema/user-roles-access-control",
     "type": "library",
     "description": "Access Control based on the user having a given role/capability",
     "keywords": [
         "PoP",
         "UserRolesAccessControl"
     ],
-    "homepage": "https://github.com/getpop/user-roles-access-control",
+    "homepage": "https://github.com/pop-schema/user-roles-access-control",
     "license": "MIT",
     "authors": [
         {
@@ -19,8 +19,8 @@
     "prefer-stable": true,
     "require": {
         "php": "~7.2",
-        "getpop/user-roles": "dev-master",
-        "getpop/user-state-access-control": "dev-master"
+        "pop-schema/user-roles": "dev-master",
+        "pop-schema/user-state-access-control": "dev-master"
     },
     "require-dev": {
         "getpop/cache-control": "dev-master",
@@ -33,12 +33,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\UserRolesAccessControl\\": "src"
+            "PoPSchema\\UserRolesAccessControl\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\UserRolesAccessControl\\": "tests"
+            "PoPSchema\\UserRolesAccessControl\\": "tests"
         }
     },
     "scripts": {

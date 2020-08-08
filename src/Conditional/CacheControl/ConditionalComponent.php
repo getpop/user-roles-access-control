@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\UserRolesAccessControl\Conditional\CacheControl;
+namespace PoPSchema\UserRolesAccessControl\Conditional\CacheControl;
 
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\UserRolesAccessControl\Component;
+use PoPSchema\UserRolesAccessControl\Component;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**

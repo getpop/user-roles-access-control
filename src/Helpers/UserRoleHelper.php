@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\UserRolesAccessControl\Helpers;
+namespace PoPSchema\UserRolesAccessControl\Helpers;
 
-use PoP\UserRoles\Facades\UserRoleTypeDataResolverFacade;
-use PoP\UserState\Facades\UserStateTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserState\Facades\UserStateTypeDataResolverFacade;
 
 class UserRoleHelper
 {

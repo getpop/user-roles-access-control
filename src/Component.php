@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\UserRolesAccessControl;
+namespace PoPSchema\UserRolesAccessControl;
 
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\Root\Component\AbstractComponent;
@@ -22,8 +22,8 @@ class Component extends AbstractComponent
     public static function getDependedComponentClasses(): array
     {
         return [
-            \PoP\UserRoles\Component::class,
-            \PoP\UserStateAccessControl\Component::class,
+            \PoPSchema\UserRoles\Component::class,
+            \PoPSchema\UserStateAccessControl\Component::class,
         ];
     }
 
@@ -56,7 +56,7 @@ class Component extends AbstractComponent
             if (class_exists('\PoP\CacheControl\Component')
                 && !in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses)
             ) {
-                \PoP\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::initialize(
+                \PoPSchema\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::initialize(
                     $configuration,
                     $skipSchema
                 );
@@ -96,7 +96,7 @@ class Component extends AbstractComponent
         ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators');
 
         if (class_exists('\PoP\CacheControl\Component')) {
-            \PoP\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::afterBoot();
+            \PoPSchema\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::afterBoot();
         }
     }
 }
