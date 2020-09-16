@@ -9,7 +9,10 @@ use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForDirectivesInPriv
 
 abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivateSchemaHookSet extends AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet
 {
-    protected $directiveResolverClasses;
+    /**
+     * @var string[]|null
+     */
+    protected ?array $directiveResolverClasses;
 
     protected function enabled(): bool
     {
